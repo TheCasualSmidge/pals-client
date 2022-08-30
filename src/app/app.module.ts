@@ -7,6 +7,7 @@ import { ProfileComponent } from './pages/profile/profile.component';
 import { AuthorizationComponent } from './pages/authorization/authorization.component';
 import { MapComponent } from './pages/map/map.component';
 import { NewsFeedComponent } from './components/news-feed/news-feed.component';
+import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { NewsFeedComponent } from './components/news-feed/news-feed.component';
     ProfileComponent,
     AuthorizationComponent,
     MapComponent,
-    NewsFeedComponent
+    NewsFeedComponent,
+    PageNotFoundComponent
   ],
   imports: [
     BrowserModule,
