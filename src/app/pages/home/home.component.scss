@@ -1,0 +1,25 @@
+.user-access-container {
+  width: 95vw;
+  max-width: 300px;
+  height: fit-content;
+  border: 3px solid #DE8B14;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  border-radius: 5px;
+  box-shadow: 3px 4px 10px #6E6A75;
+  padding: 15px;
+}
+
+.welcome-copy {
+  text-align: center;
+  margin: auto;
+  padding-bottom: 15px;
+}
+
+.user-access {
+  width: fit-content;
+  margin: auto;
+}
