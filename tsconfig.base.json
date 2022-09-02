@@ -23,6 +23,11 @@
       "dom"
     ]
   },
+  // TODO: Add index files to components, helpers, models, services
+  "paths": {
+    "@app/*":["src/app/*"],
+    "@environments/•":["/src/environments/*"]
+  },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
     "strictInjectionParameters": true,
