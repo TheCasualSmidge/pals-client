@@ -8,6 +8,8 @@ import { AuthorizationComponent } from './pages/authorization/authorization.comp
 import { MapComponent } from './pages/map/map.component';
 import { NewsFeedComponent } from './components/news-feed/news-feed.component';
 import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
+import { LoginComponent } from './pages/authorization/login/login.component';
+import { SignUpComponent } from './pages/authorization/sign-up/sign-up.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +19,9 @@ import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.com
     AuthorizationComponent,
     MapComponent,
     NewsFeedComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    LoginComponent,
+    SignUpComponent
   ],
   imports: [
     BrowserModule,
