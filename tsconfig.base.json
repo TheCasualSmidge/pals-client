@@ -24,8 +24,10 @@
     ],
     // TODO: Add index files to components, helpers, models, services
     "paths": {
-      "@app/*":["src/app/*"],
-      "@environments/*":["/src/environments/*"]
+      "app/*":["src/app/*"],
+      "models/*":["src/app/models/*"],
+      "services/*":["src/app/services/*"],
+      "environments/*":["/src/environments/*"]
     },
   },
   "angularCompilerOptions": {
