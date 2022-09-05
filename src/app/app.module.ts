@@ -10,6 +10,8 @@ import { NewsFeedComponent } from './components/news-feed/news-feed.component';
 import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
 import { LoginComponent } from './pages/authorization/login/login.component';
 import { SignUpComponent } from './pages/authorization/sign-up/sign-up.component';
+import { AccountComponent } from './components/account/account.component';
+import { UsersComponent } from './components/users/users.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +23,9 @@ import { SignUpComponent } from './pages/authorization/sign-up/sign-up.component
     NewsFeedComponent,
     PageNotFoundComponent,
     LoginComponent,
-    SignUpComponent
+    SignUpComponent,
+    AccountComponent,
+    UsersComponent
   ],
   imports: [
     BrowserModule,
