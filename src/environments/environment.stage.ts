@@ -1,6 +1,6 @@
 export const environment = {
   production: false,
-  stage: false,
-  development: true,
+  stage: true,
+  development: false,
   apiUrl: 'http://locahost:3306'
 }
