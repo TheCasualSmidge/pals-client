@@ -1,13 +1,7 @@
-<section id="home-container">
-  <div class="welcome-container">
-    <div class="user-access-container">
-      <div class="welcome-copy">
-        <h1 class="welcome-tile">Welcome!</h1>
-        <h3 class="find-copy">Find your PedalPals</h3>
-      </div>
-      <div class="user-access">
-        <app-authorization></app-authorization>
-      </div>
-    </div>
+<div class="p-4">
+  <div class="container">
+      <h1>Hi {{user.firstName}}!</h1>
+      <p>You're logged in with Angular 10!!</p>
+      <p><a routerLink="/users">Manage Users</a></p>
   </div>
-</section>
+</div>

@@ -1,39 +1,35 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+
+// used to create fake backend
+import { fakeBackendProvider, JwtInterceptor, ErrorInterceptor } from '@helpers/index';
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HomeComponent } from './pages/home/home.component';
-import { ProfileComponent } from './pages/profile/profile.component';
-import { AuthorizationComponent } from './pages/authorization/authorization.component';
-import { MapComponent } from './pages/map/map.component';
-import { NewsFeedComponent } from './components/news-feed/news-feed.component';
-import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
-import { LoginComponent } from './pages/authorization/login/login.component';
-import { SignUpComponent } from './pages/authorization/sign-up/sign-up.component';
-import { AccountComponent } from './components/account/account.component';
-import { UsersComponent } from './components/users/users.component';
-import { AlertComponent } from './components/alert/alert.component';
+import { AlertComponent } from '@components/alert/alert.component';
+import { PagesModule } from './pages/pages.module';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    HomeComponent,
-    ProfileComponent,
-    AuthorizationComponent,
-    MapComponent,
-    NewsFeedComponent,
-    PageNotFoundComponent,
-    LoginComponent,
-    SignUpComponent,
-    AccountComponent,
-    UsersComponent,
-    AlertComponent
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
+    imports: [
+        BrowserModule,
+        ReactiveFormsModule,
+        HttpClientModule,
+        AppRoutingModule,
+        PagesModule
+    ],
+    declarations: [
+        AppComponent,
+        AlertComponent
+    ],
+    providers: [
+        { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+        { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+
+        // provider used to create fake backend
+        fakeBackendProvider
+    ],
+    bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule { };

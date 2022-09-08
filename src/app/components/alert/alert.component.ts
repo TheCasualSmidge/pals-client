@@ -1,69 +1,95 @@
-import { Component, OnInit, OnDestroy, Input } from "@angular/core";
-import { Router, NavigationStart } from "@angular/router";
-import { Subscription } from "rxjs";
-import { Alert, AlertType } from "@models/alert";
-import { AlertService } from "@services/alert.service";
+import { Component, OnInit, OnDestroy, Input } from '@angular/core';
+import { Router, NavigationStart } from '@angular/router';
+import { Subscription } from 'rxjs';
 
-@Component({
-  selector: "app-alert",
-  templateUrl: "./alert.component.html",
-  styleUrls: ["./alert.component.scss"],
-})
-export class AlertComponent implements OnInit {
+import { Alert, AlertType } from '@models/alert';
+import { AlertService } from '@services/alert.service';
+
+@Component({ selector: 'alert', templateUrl: 'alert.component.html' })
+export class AlertComponent implements OnInit, OnDestroy {
   @Input() id = 'default-alert';
   @Input() fade = true;
 
   alerts: Alert[] = [];
   alertSubscription: Subscription;
-  routerSubscription: Subscription;
+  routeSubscription: Subscription;
 
-  constructor(
-    private router: Router,
-    private alertService: AlertService
-  ) {}
+  constructor(private router: Router, private alertService: AlertService) {}
 
-  ngOnInit(): void {
-    // subscribe to new alerts
+  ngOnInit() {
+    // subscribe to new alert notifications
+    this.alertSubscription = this.alertService
+      .onAlert(this.id)
+      .subscribe((alert) => {
+        // clear alerts when an empty alert is received
+        if (!alert.message) {
+          // filter out alerts without 'keepAfterRouteChange' flag
+          this.alerts = this.alerts.filter((x) => x.keepAfterRouteChange);
 
-    // if not alerts then clear alerts array
+          // remove 'keepAfterRouteChange' flag on the rest
+          this.alerts.forEach((x) => delete x.keepAfterRouteChange);
+          return;
+        }
 
-    // filter out 'keepAfterRouteChange'
+        // add alert to array
+        this.alerts.push(alert);
 
-    // remove 'KeepAfterRouteChange'
-
-    // add alert to array
-
-    // if required then auto close alert
+        // auto close alert if required
+        if (alert.autoClose) {
+          setTimeout(() => this.removeAlert(alert), 3000);
+        }
+      });
 
     // clear alerts on location change
+    this.routeSubscription = this.router.events.subscribe((event) => {
+      if (event instanceof NavigationStart) {
+        this.alertService.clear(this.id);
+      }
+    });
   }
 
   ngOnDestroy() {
     // unsubscribe to avoid memory leaks
+    this.alertSubscription.unsubscribe();
+    this.routeSubscription.unsubscribe();
   }
 
-  removeAlert(alert: Alert){
-    // if alert array is empty then return
+  removeAlert(alert: Alert) {
+    // check if already removed to prevent error on auto close
+    if (!this.alerts.includes(alert)) return;
 
-    // fade out alert
+    if (this.fade) {
+      // fade out alert
+      alert.fade = true;
 
-    // remove alert after fadeout
-
-    // remove alert
+      // remove alert after faded out
+      setTimeout(() => {
+        this.alerts = this.alerts.filter((x) => x !== alert);
+      }, 250);
+    } else {
+      // remove alert
+      this.alerts = this.alerts.filter((x) => x !== alert);
+    }
   }
 
   scssClass(alert: Alert) {
-    // if there is no alert then return
-    // else
+    if (!alert) return;
 
-    // create a style classes array
+    const classes = ['alert', 'alert-dismissable', 'mt-4', 'container'];
 
-    // create alertTypeClass object
+    const alertTypeClass = {
+      [AlertType.Success]: 'alert alert-success',
+      [AlertType.Error]: 'alert alert-danger',
+      [AlertType.Info]: 'alert alert-info',
+      [AlertType.Warning]: 'alert alert-warning',
+    };
 
-    // push alertTypeClass[alert.type] into styles class array
+    classes.push(alertTypeClass[alert.type]);
 
-    // if alert fade then push 'fade' to style classes array
+    if (alert.fade) {
+      classes.push('fade');
+    }
 
-    // return style classes with .join(' ')
+    return classes.join(' ');
   }
 }
