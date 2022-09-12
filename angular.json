@@ -10,7 +10,7 @@
           "style": "scss"
         },
         "@schematics/angular:application": {
-          "strict": true
+          "strict": false
         }
       },
       "root": "",
@@ -107,5 +107,7 @@
       }
     }
   },
-  "defaultProject": "pedal-pals"
+  "cli": {
+    "analytics": false
+  }
 }
