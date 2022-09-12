@@ -17,7 +17,7 @@ import {
 } from 'rxjs';
 
 const usersKey = 'SuperTopDoubleBackSecret';
-let users = JSON.parse(localStorage.getItem(usersKey)); // current value of usersKey
+let users = [JSON.parse(localStorage.getItem(usersKey))]; // current value of usersKey
 
 @Injectable()
 
@@ -61,6 +61,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
 
     function authenticate() {
       const { username, password } = body;
+      console.log(body)
       const user = users.find(
         (x) => x.username === username && x.password === password
       );
@@ -71,6 +72,10 @@ export class FakeBackendInterceptor implements HttpInterceptor {
       });
     }
 
+    function generateRandomId(length = 10){
+      return Math.random().toString(20).substring(0, length);
+    }
+
     function register() {
       const user = body;
 
@@ -78,9 +83,10 @@ export class FakeBackendInterceptor implements HttpInterceptor {
         return error('Username "' + user.username + '" is already taken');
       }
 
-      user.id = users.length ? Math.max(...users.map((x) => x.id)) + 1 : 1;
+      user.id = generateRandomId();
       users.push(user);
-      localStorage.setItem(usersKey, JSON.stringify(users));
+      console.log(users)
+      localStorage.setItem(usersKey, JSON.stringify(user));
       return ok();
     }
 
