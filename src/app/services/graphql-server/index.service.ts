@@ -8,8 +8,8 @@ export class IndexService {
   public typeDefs = gql`
     type User {
       id: Number;
-      firstName: String;
-      lastName: String;
+      first_name: String;
+      last_name: String;
       username: String;
       password: String;
     }
@@ -22,8 +22,8 @@ export class IndexService {
   public users = [
     {
       id: "d.54feas",
-      firstName: "Steven",
-      lastName: "Midgley",
+      first_name: "Steven",
+      last_name: "Midgley",
       username: "casualsmidge",
       password: "password",
     },

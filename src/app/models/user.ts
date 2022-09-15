@@ -2,7 +2,7 @@ export class User {
   id!: string;
   username!: string;
   password!: string;
-  firstName!: string;
-  lastName!: string;
+  first_name!: string;
+  last_name!: string;
   token!: string;
 }
