@@ -13,7 +13,7 @@ import { PagesModule } from './pages/pages.module';
 
 @NgModule({
     imports: [
-        BrowserModule,
+        BrowserModule.withServerTransition({ appId: 'serverApp' }),
         ReactiveFormsModule,
         HttpClientModule,
         AppRoutingModule,
