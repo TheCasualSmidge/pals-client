@@ -3,7 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { LayoutComponent } from './layout/layout.component';
 import { ListComponent } from './list/list.component';
-import { AddEditComponent } from './add-edit/add-edit.component';
+import { AddEditComponent } from './edit/edit.component';
 
 const routes: Routes = [
     {
