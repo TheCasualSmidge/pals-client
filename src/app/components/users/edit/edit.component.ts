@@ -6,7 +6,7 @@ import { first } from 'rxjs/operators';
 import { AccountService, AlertService } from '@services/index';
 
 @Component({ templateUrl: 'edit.component.html' })
-export class AddEditComponent implements OnInit {
+export class EditComponent implements OnInit {
   form: FormGroup;
   id: string;
   isAddMode: boolean;
